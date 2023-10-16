@@ -1,0 +1,116 @@
+{
+    "aman": [
+        {
+            "coordinate": {
+                "h": 103.33333333333333,
+                "w": 149.33333333333334,
+                "x": 90,
+                "y": 96
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 139.33333333333334,
+                "w": 194.66666666666666,
+                "x": 93.33333333333333,
+                "y": 123.33333333333333
+            },
+            "label": "desg",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 210,
+                "w": 249.33333333333334,
+                "x": 221.33333333333334,
+                "y": 204.66666666666666
+            },
+            "label": "experience",
+            "text": "2.2 years",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 478,
+                "w": 208,
+                "x": 122,
+                "y": 466
+            },
+            "label": "project 1",
+            "text": "Chatbot Module",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 277.3333333333333,
+                "w": 170,
+                "x": 123.33333333333333,
+                "y": 270.6666666666667
+            },
+            "label": "project 2",
+            "text": "Happier",
+            "page_no": 2
+        },
+        {
+            "coordinate": {
+                "h": 712,
+                "w": 233.33333333333334,
+                "x": 125.33333333333333,
+                "y": 702
+            },
+            "label": "project 3",
+            "text": "Eye Detection Module",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 252.66666666666666,
+                "w": 545.3333333333334,
+                "x": 70.66666666666667,
+                "y": 201.33333333333334
+            },
+            "label": "description",
+            "text": "Passionate and motivated with 2.2 years ",
+            "page_no": 1
+        }
+    ],
+    "nitesh": [
+        {
+            "coordinate": {
+                "h": 101.33333333333333,
+                "w": 146,
+                "x": 82.66666666666667,
+                "y": 95.33333333333333
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 213.33333333333334,
+                "w": 184,
+                "x": 82.66666666666667,
+                "y": 204.66666666666666
+            },
+            "label": "hobby",
+            "text": "Passionate and motivated",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 543.3333333333334,
+                "w": 276.6666666666667,
+                "x": 116.66666666666667,
+                "y": 540.6666666666666
+            },
+            "label": "skills",
+            "text": "(LLMs) like GPT-4 with external data.",
+            "page_no": 1
+        }
+    ]
+}

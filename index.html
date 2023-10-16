@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jcrop/0.9.15/css/jquery.Jcrop.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcrop/0.9.15/js/jquery.Jcrop.min.js"></script>
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+    <title>Table Extraction</title>
+</head>
+<body>
+    <img src="QualityHosting_page-0001.jpg" id="target" alt="Your Image">
+    <button id="extractTableButton">Extract Table Data</button>
+    <div id="tableData"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/0.9.15/js/jquery.Jcrop.js"></script>
+    <script>
+      $(document).ready(function() {
+        let coord=NaN;
+    
+    // Initialize jCrop on the image
+    $('#target').Jcrop({
+        onSelect: function(c) {
+            // Store the selected coordinates
+             
+            var coordinates = {
+              x: c.x,
+              y: c.y,
+              w: c.w,
+              h: c.h
+            };
+            coord = coordinates;
+
+            // Display the selected coordinates
+            console.log('Selected Coordinates:', coordinates);
+        }
+    });
+
+    // Handle the button click to extract table data
+    $('#extractTableButton').on('click', function() {
+            
+        var tableData = extractTableData(coord);
+        $('#tableData').text(tableData);
+    });
+
+    function extractTableData(coordinates) {
+        var img = document.getElementById('target');
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+
+        canvas.width = coordinates.w;
+        canvas.height = coordinates.h;
+
+        // Draw the selected area on the canvas
+        context.drawImage(img, coordinates.x, coordinates.y, coordinates.w, coordinates.h, 0, 0, coordinates.w, coordinates.h);
+
+        // Convert the canvas to base64 data URL
+        var base64DataUrl = canvas.toDataURL('image/png');
+        // Perform OCR on the selected area using Tesseract.js
+        Tesseract.recognize(base64DataUrl, 'eng', { logger: info => console.log(info) })
+        .then(function(result) {
+             // Format the extracted text as an HTML table
+             var tableHtml = formatTextAsTable(result.text);
+                $('#tableData').html('Extracted Table Data:<br>' + tableHtml);
+            })
+            .catch(function(error) {
+                console.error('Error during OCR:', error);
+            });
+    }
+
+    function formatTextAsTable(text) {
+        // Split the extracted text into rows and columns
+        var rows = text.trim().split('\n');
+        var tableHtml = '<table border="1">';
+
+        for (var i = 0; i < rows.length; i++) {
+            var columns = rows[i].split('\t'); // Adjust the delimiter based on your data
+
+            tableHtml += '<tr>';
+
+            for (var j = 0; j < columns.length; j++) {
+                tableHtml += '<td>' + columns[j] + '</td>';
+            }
+
+            tableHtml += '</tr>';
+        }
+
+        tableHtml += '</table>';
+        return tableHtml;
+    }
+
+
+});
+
+    </script>
+</body>
+</html>

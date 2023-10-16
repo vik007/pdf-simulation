@@ -89,3 +89,17 @@ python3 main.py
    |-- main.py                               
    ```
  
+## Directory Descriptions
+
+   - app/: Contains files related to the Flask application.
+   - static/assets/: Contains static assets such as CSS, JS, and images.
+   - uploads/: Directory for uploaded files and data storage.
+   - includes/: Templates and layout components for the application.
+   - home/: Contains HTML templates for specific pages.
+   - config.py: Configuration file for the application.
+   - .gitignore: Git configuration to ignore specified files.
+   - requirements.txt: List of Python dependencies for the project.
+   - run.sh: Shell script to run the application.
+   - README.md: Project documentation.
+   - .env: Environment variables configuration file.
+   - main.py: Main Python file for running the application.

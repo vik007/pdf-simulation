@@ -112,5 +112,40 @@
             "text": "(LLMs) like GPT-4 with external data.",
             "page_no": 1
         }
+    ],
+    "abc": [
+        {
+            "coordinate": {
+                "h": 102.66666666666667,
+                "w": 138,
+                "x": 76.66666666666667,
+                "y": 92
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 138,
+                "w": 212,
+                "x": 93.33333333333333,
+                "y": 126
+            },
+            "label": "exp",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 212,
+                "w": 259.3333333333333,
+                "x": 223.33333333333334,
+                "y": 204.66666666666666
+            },
+            "label": "exp",
+            "text": "2.2 years",
+            "page_no": 1
+        }
     ]
 }

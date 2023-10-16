@@ -1,0 +1,12 @@
+# Ignore Python virtual environment
+pdf_env/
+env/
+*.pyc
+
+# Ignore VSCode settings
+.vscode/
+.env/
+*.py[cod]
+__pycache__/
+
+  

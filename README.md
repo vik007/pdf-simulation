@@ -50,7 +50,7 @@ python3 main.py
  
 
 ## PROJECT FOLDER STRUCTURE 
-   |
+   ```
    |-- app/
    |    |
    |    |-- __init__.py                           
@@ -87,5 +87,5 @@ python3 main.py
    |-- README.md
    |-- .env                                 
    |-- main.py                               
-   |
+   ```
  

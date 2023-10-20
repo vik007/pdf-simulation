@@ -14,6 +14,7 @@ template_folder="pdf_templates"
 
 bp = Blueprint('main', __name__) 
 
+# Base Routes
 @bp.route('/')
 def pdf_annoted():
     return render_template('home/annoted.html', segment='annoted',aman="aman jsihsib" )
@@ -22,7 +23,11 @@ def pdf_annoted():
 def pdf_automate():
     return render_template('home/automate.html', segment='automate')
  
+@bp.route('/apply-template')
+def apply_template():
+    return render_template('home/pdf_template.html', segment='template')
 
+# Annoted section Routes
 @bp.route('/display', methods = ['POST'])
 def display():
     file = request.files.get('file')
@@ -106,8 +111,6 @@ def save_template():
         # Check if the 'template' folder exists, and create it if not
         if not os.path.exists(template_folder):
             os.makedirs(template_folder)
-
-        
         
         # if filename is empty to fill data :
         if os.path.getsize(file_path) == 0:
@@ -133,8 +136,6 @@ def save_template():
         # Write the updated data to the file
         with open(file_path, "w") as file:
             json.dump(existing_data, file, indent=4)
-       
-        
 
         return jsonify({"message": "update file Success"})
     
@@ -154,42 +155,89 @@ def save_template():
         else:
             return jsonify({"error": "File not found there is no template found...."}), 404
  
+def initilise_data(data):
+    rows=[]
+    # Initialize lists to store the data 
+    for pdf, entries in data.items():
+        for entry in entries:
+            
+            text = entry["text"]
+            label = entry["label"]
+            page_no = entry["page_no"]
+            rows.append({
+                "Label": label,
+                "Extracted data": text,
+                "Page_no": page_no})
+    return rows
 
-
-@bp.route('/download') #localhost:8000/download?file_name=aman&format=json
+@bp.route('/download', methods=['POST', 'GET']) #localhost:8000/download?file_name=aman&format=json
 def download_file(): 
+    if request.method == 'GET':
+        if not os.path.exists(file_path):
+            return jsonify({"error": "File not found. There is no template found."}), 404
 
-    if not os.path.exists(file_path):
-        return jsonify({"error": "File not found. There is no template found."}), 404
+        with open(file_path, "r") as file:
+            data = json.load(file)
 
-    with open(file_path, "r") as file:
-        data = json.load(file)
+        pdf_name = request.args.get('file_name')
+        formate = request.args.get('format').lower()
+    
 
-    pdf_name = request.args.get('file_name')
-    formate = request.args.get('format').lower()
-   
+        if formate:
+            
+                rows = initilise_data(data)
 
-    if pdf_name and formate:
-        if pdf_name in data:
-            rows=[]
-            # Initialize lists to store the data 
-            for pdf, entries in data.items():
-                for entry in entries:
+                if formate == "json":
+    
+                    # Return the data for the specified PDF
+                    return Response(str(rows), 
+                mimetype='application/json',
+                headers={'Content-Disposition':f'attachment;filename={filename}'})
+
+                # return jsonify({pdf_name: data[pdf_name]}), 200
+                if formate == "csv":
+
+                    # Create a DataFrame
+                    # Define CSV header and rows
+                    csv_header = ["Label", "Extracted data", "Page_no"]
+                    csv_rows = [[row["Label"], row["Extracted data"], row["Page_no"]] for row in rows]
                     
-                    text = entry["text"]
-                    label = entry["label"]
-                    page_no = entry["page_no"]
-                    rows.append({
-                        "Label": label,
-                        "Extracted data": text,
-                        "Page_no": page_no})
+                    # Create a string buffer to hold CSV data
+                    csv_buffer = StringIO()
+                    csv_writer = csv.writer(csv_buffer)
+                    csv_writer.writerow(csv_header)
+                    csv_writer.writerows(csv_rows)
+
+                    # Prepare the response with CSV data
+                    response = Response(csv_buffer.getvalue(), mimetype='text/csv')
+                    response.headers.set('Content-Disposition', f'attachment;filename={filename}.csv')
+
+                    return response
+
+        else:
+            return jsonify({"error": f"PDF formate not found of {pdf_name}"}), 404
+        
+    
+    if request.method == 'POST':
+        breakpoint()
+        data = request.get_json()
+
+        if not data:
+            return jsonify({"error": "No data provided in the request body"}), 400
+        
+        
+        formate = request.args.get('format').lower()
+
+        if formate:
+           
+            rows = initilise_data(data)
 
             if formate == "json":
- 
+    
                 # Return the data for the specified PDF
                 return Response(str(rows), 
-            mimetype='application/json',
-            headers={'Content-Disposition':f'attachment;filename={filename}'})
+                mimetype='application/json',
+                headers={'Content-Disposition':f'attachment;filename={filename}'})
 
             # return jsonify({pdf_name: data[pdf_name]}), 200
             if formate == "csv":
@@ -211,8 +259,10 @@ def download_file():
 
                 return response
 
-        else:
-            return jsonify({"error": f"PDF not found of {pdf_name}"}), 404
-    else:
-        # Return all keys (PDF names) from the JSON file
-        return jsonify(list(data.keys())), 200
+            else:
+                return jsonify({"error": f"PDF not found of {pdf_name}"}), 404
+        
+
+
+
+# Apply Template section Routes

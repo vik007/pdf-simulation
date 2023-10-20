@@ -79,18 +79,20 @@
                                         </h3>
                                     </div>
                                     <form autocomplete="off" id="form-id" class="form" role="form">
-                                        <div class="text-center" id="form-div-btn-id">
-                                            <button type="submit" class="btn-outline-primary"  id="submit-btn" style="display: none;">Submit >>></button>
-                                            
-                                            <div class="dropdown">
-                                                <button type="button" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton download-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="text-center row" id="form-div-btn-id" style="display: none;">
+                                            <span class="col-3">
+                                            <button type="submit" class="btn-outline-primary"  id="submit-btn" >Submit >>></button>
+                                            </span>
+
+                                            <span class="dropdown col-6" id="download-btnn">
+                                                <button type="button" class="btn btn-danger dropdown-toggle" type="button"  id="dropdownMenuButton download-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                   Download Data
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                   <a class="dropdown-item" id="json-btn">JSON Data</a>
                                                   <a class="dropdown-item" id="csv-btn">CSV Data</a> 
                                                 </div>
-                                              </div>
+                                            </span>
                                         </div>
                                     </form>
 

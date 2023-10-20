@@ -76,6 +76,39 @@
             "label": "description",
             "text": "Passionate and motivated with 2.2 years ",
             "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 106,
+                "w": 133.33333333333334,
+                "x": 78,
+                "y": 90.66666666666667
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 212,
+                "w": 259.3333333333333,
+                "x": 226,
+                "y": 208
+            },
+            "label": "exp",
+            "text": "2.2 years",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 280,
+                "w": 154.66666666666666,
+                "x": 122.66666666666667,
+                "y": 268
+            },
+            "label": "project",
+            "text": "Happier",
+            "page_no": 2
         }
     ],
     "nitesh": [
@@ -146,6 +179,76 @@
             "label": "exp",
             "text": "2.2 years",
             "page_no": 1
+        }
+    ],
+    "a": [
+        {
+            "coordinate": {
+                "h": 108.66666666666667,
+                "w": 143.33333333333334,
+                "x": 73.33333333333333,
+                "y": 86
+            },
+            "label": "a",
+            "text": "Aman",
+            "page_no": 1
+        }
+    ],
+    "resume": [
+        {
+            "coordinate": {
+                "h": 103.33333333333333,
+                "w": 143.33333333333334,
+                "x": 86.66666666666667,
+                "y": 94.66666666666667
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 128,
+                "w": 175.33333333333334,
+                "x": 108,
+                "y": 124.66666666666667
+            },
+            "label": "desg",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 476,
+                "w": 223.33333333333334,
+                "x": 121.33333333333333,
+                "y": 468.6666666666667
+            },
+            "label": "project 1",
+            "text": "Chatbot Module",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 276.6666666666667,
+                "w": 164,
+                "x": 124,
+                "y": 270.6666666666667
+            },
+            "label": "project 2",
+            "text": "Happier",
+            "page_no": 2
+        },
+        {
+            "coordinate": {
+                "h": 302,
+                "w": 424.6666666666667,
+                "x": 159.33333333333334,
+                "y": 300
+            },
+            "label": "desc",
+            "text": "Python, Fast API, pandas, selenium, requests, MS SQL",
+            "page_no": 2
         }
     ]
 }

@@ -83,10 +83,10 @@ $("#fileupload").on("change", async function (event) {
         })
         .then(response => response.blob() )
         .then(blob => { 
-            const objectUrl = URL.createObjectURL(blob);
-            
+           
+            const objectUrl = URL.createObjectURL(blob); 
+           
             pdf_pages_function(objectUrl, file)
-             
         });
         
         $('#upload_pdf').css("display", "none");
@@ -98,9 +98,7 @@ $("#fileupload").on("change", async function (event) {
         console.error('Error:', error);
     }
 });
-
-
-let pdf_name="";
+let currentPage = 1;
 function pdf_pages_function(pdf_url, file){
 
 const pdfImageContainer = document.getElementById('pdfImageContainer');
@@ -112,8 +110,8 @@ var file_name = file.name
 pdf_name = file_name;
 var isPDF = file_name.toLowerCase().endsWith('.pdf');
 let pdfDoc = null;
-let currentPage = 1;
 let template_data_obj = obj[pdf_name] = [];
+
 
 function display_pdf_Image(pageNumber) {
     pdfDoc.getPage(pageNumber).then(page => {
@@ -234,126 +232,216 @@ if (isPDF){
     
 }
 
-const inputContainer = document.getElementById('form-field')
-const addButton = document.getElementById('addField')
-const scanText = document.getElementById('text-show')
-const form_id = document.getElementById('form-id') 
+$('#templates-btn').on("click", function(event) {
+    event.preventDefault();
 
-let sourceId='';
-let target_value;  
-let obj = {}
-
-addButton.addEventListener('mouseover', function () {
-  scanText.style.visibility = 'visible';
-  addButton.style.borderStyle = 'solid';
-  addButton.style.borderColor= 'blue';
-  addButton.style.borderWidth = '5px';
-  
-});
-
-addButton.addEventListener('mouseout', function () {
-    scanText.style.visibility = 'hidden';
-    addButton.style.borderStyle = '';
-    addButton.style.borderColor= '';
-    addButton.style.borderWidth = '';
-  });
-
-let fieldCount = 0; 
-
-addButton.addEventListener('click', function(){
-  fieldCount++;
-
-  const newRow = document.createElement('div');
-  newRow.classList.add('row', 'mb-2', 'form-row');
-
- const labelColumn = document.createElement('div');
- labelColumn.classList.add('col-md-4');
-
- const inputColumn = document.createElement('div');
- inputColumn.classList.add('col-md-8');
-
- const newLabel = document.createElement('input');
- newLabel.for = `input-${fieldCount}`;
- newLabel.classList.add('form-control');
- newLabel.id = `label-${fieldCount}`;
- newLabel.style.color='black'
- newLabel.placeholder = 'Label Name';
-
- // Create a new input field
- const newInput = document.createElement('input');
- newInput.type = 'text';
- newInput.id = `input-${fieldCount}`;
- newInput.placeholder = "Extracted text"
- newInput.value=''
- newInput.classList.add('form-control', 'dynamic-input');
- newInput.setAttribute('aria-describedby', 'passwordHelpInline');
- newInput.setAttribute('data-source', `input-${fieldCount}`);
-
- // create a new input tag for save coordinaters 
- const coord = document.createElement('input')
- coord.id = `hide-coord-id-${fieldCount}`;
- coord.style.display = 'none';
- coord.setAttribute('value', '');
-  
- labelColumn.appendChild(newLabel);
- inputColumn.appendChild(newInput);
- // Append the new label and input field to the container
- newRow.appendChild(labelColumn);
- newRow.appendChild(inputColumn);
- newRow.appendChild(coord); 
- form_id.insertBefore(newRow, form_id.firstChild)
- inputContainer.appendChild(form_id);
- 
- $("#form-div-btn-id").css("display", "block");
-
-});   
-
-
-inputContainer.addEventListener('click', function (event) {
- if (event.target.classList.contains('dynamic-input')) {
-    sourceId = event.target.getAttribute('data-source');
-    target_value=event.target;
-
- }
-});
-
-
-form_id.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    let new_name = prompt("Please enter your name:", "");
-    if (new_name != ""){
-        obj[new_name] = obj[pdf_name]
-        delete obj[pdf_name]
-    }
-
-
-    // Collect the form data
-    data = JSON.stringify(obj);
+    const temp_menu = $('#templates-menu');
+    const temp_btn = $('#templates-btn');
+    temp_menu.empty();
+     
     fetch('/template', {
-        method: 'POST',
+        method: 'GET',
         headers: {
         // 'Content-Type': 'application/json/ multipart/form-data',
         'X-CSRFToken': csrfToken,
-        },
-        body:data,
+        }, 
         }).then(response => response.json())
-        .then(res => {
-            console.log("API resp : ", res)
+        .then(data => {
+            data.forEach(option => {
+                temp_menu.append(`<a class="dropdown-item" href="#" data-option="${option}">${option}</a>`);
+              });
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Data fetching Error:', error);
             });
- 
-  
-  });
+
+    // Event listener to handle when an option is clicked
+    temp_menu.on('click', '.dropdown-item', function(event) {
+        event.preventDefault();
+        const selectedOption = $(this).data('option');
+        console.log(`${selectedOption} option clicked`);
+        temp_btn.text(selectedOption);
+
+        mapping_label(selectedOption);
+    });
 
 
-  $('#json-btn').on('click', function(event) {
-    event.preventDefault();
-    console.log("json click")
-    // fetch(`/download?file_name=${}&format=json`)
+}) 
+
+function sendSelectedRectangle(x0, y0, x1, y1, pageno) {
+    return new Promise((resolve, reject) => {
+    const formData = new FormData();
+   
+    const transformedCoordinates = {
+    x: x0,
+    y: y0,
+    w: x1,
+    h: y1,
+    };
+   
+    // Create the data object to send to the API
+    const data = JSON.stringify({
+    coordinates: transformedCoordinates,
+    pdf: pdf_name,
+    page: pageno,
+    });
     
+    fetch("/get_data_coordinates", {
+    method: "POST",
+    headers: {
+    "X-CSRFToken": csrfToken,
+    },
+    body: data,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+    
+    resolve(data.selected_words);
+    })
+    .catch((error) => {
+    console.error("Error:", error);
+    reject(error);
+    });
+    });
+   }
+
+let fieldCount=0;
+const inputContainer = document.getElementById('form-field')
+const form_id = document.getElementById("form-id");
+let sourceId='';
+let target_value;  
+let obj = {}
+            
+function mapping_label(option){
+     
+    fetch(`/template?file_name=${option}`, {
+        method: 'GET',
+        headers: {
+        'X-CSRFToken': csrfToken,
+        }, 
+        }).then(response => response.json())
+        .then(data => { 
+            let op = $('#templates-btn').text()
+ 
+            create_form(data[op]);
+        })
+        .catch(error => {
+            console.error('Data fetching Error:', error);
+            });
+
+        function create_form(obj) {
+            
+            obj.forEach((item, index) => {
+            const newRow = document.createElement("div");
+            newRow.classList.add("row", "mb-2", "form-row");
+            
+            const labelColumn = document.createElement("div");
+            labelColumn.classList.add("col-md-4");
+            
+            const inputColumn = document.createElement("div");
+            inputColumn.classList.add("col-md-8");
+            
+            const newLabel = document.createElement("input");
+            newLabel.for = `input-${fieldCount}`;
+            newLabel.classList.add("form-control");
+            newLabel.id = `label-${fieldCount}`;
+            newLabel.style.color = "black";
+            newLabel.placeholder = "Label Name";
+            newLabel.value = item.label;
+            
+            // Create a new input field
+            const newInput = document.createElement("input");
+            newInput.type = "text";
+            newInput.id = `input-${fieldCount}`;
+            newInput.placeholder = "Extracted text";
+            newInput.classList.add("form-control", "dynamic-input");
+            newInput.setAttribute("aria-describedby", "passwordHelpInline");
+            newInput.setAttribute("data-source", `input-${fieldCount}`);
+             
+            // Use Promise to get the extracted text and set it in the input field
+            sendSelectedRectangle(item.coordinate.x, item.coordinate.y, item.coordinate.w, item.coordinate.h, item.page_no)
+            .then((exttext) => {
+            newInput.value = exttext; // Set the value here
+            })
+            .catch((error) => {
+            console.error("Error getting extracted text:", error);
+            });
+            
+            // create a new input tag for saving coordinates
+            const coord = document.createElement("input");
+            coord.id = `hide-coord-id-${fieldCount}`;
+            coord.style.display = "none";
+            coord.value = item.coordinates;
+            coord.setAttribute("value", "");
+            
+            labelColumn.appendChild(newLabel);
+            inputColumn.appendChild(newInput);
+            // Append the new label and input field to the container
+            newRow.appendChild(labelColumn);
+            newRow.appendChild(inputColumn);
+            newRow.appendChild(coord);
+            
+            form_id.appendChild(newRow);
+            form_id.insertBefore(newRow, form_id.firstChild);
+            inputContainer.appendChild(form_id);
+ 
+            });
+            $("#form-div-btn-id").css("display", "block");
+            }
+               
+}
+
+inputContainer.addEventListener('click', function (event) {
+    if (event.target.classList.contains('dynamic-input')) {
+       sourceId = event.target.getAttribute('data-source');
+       target_value=event.target;
+   
+    }
+   });
+
+$('#json-btn').on('click', function(event) {
+event.preventDefault();
+console.log("json download")
+debugger
+// fetch(`/download?file_name=${}&format=json`)
+// Modify the API response to include the file name
+fetch(`/download?file_name=""&format=json`, {
+    method: 'POST',
+    headers: {
+        // 'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+    },
+    body: JSON.stringify(obj),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.blob(); // Get the response as a blob
+})
+.then(blob => {
+    // Create a link to trigger the download
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+
+    // Set the desired file name for the download
+    const fileName = 'data.csv';
+    a.download = fileName;
+    
+    // Append the link to the body
+    document.body.appendChild(a);
+
+    // Simulate a click on the link to start the download
+    a.click();
+
+    // Remove the link from the body after download
+    document.body.removeChild(a);
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+ 
 });
 
 $('#csv-btn').on('click', function(event) {

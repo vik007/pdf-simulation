@@ -1,12 +1,17 @@
 # Ignore Python virtual environment
 pdf_env/
-env/
-*.pyc
+
 
 # Ignore VSCode settings
 .vscode/
-.env/
-*.py[cod]
+
+# Ignore Junk files from project
+*.pyc
 __pycache__/
+
+# Ignore project information file
+.env/
+*.env
+
 
   

@@ -7,6 +7,9 @@ import json, fitz, cv2
 from flask import Response 
 from io import StringIO
 import csv
+from transformers import pipeline, AutoTokenizer, AutoModelForDocumentQuestionAnswering
+from pdf2image import convert_from_path
+import pytesseract
 
 selected_data = []
 data_dict = dict()
@@ -266,3 +269,58 @@ def download_file():
 
 
 # Apply Template section Routes
+
+pipe = pipeline("document-question-answering", model="impira/layoutlm-invoices")
+
+# Load the LayoutLM tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained("impira/layoutlm-invoices")
+model = AutoModelForDocumentQuestionAnswering.from_pretrained("impira/layoutlm-invoices")
+
+# Detect Automation Route
+@bp.route('/process_pdf', methods=['POST'])
+def process_pdf():
+
+    pdf_filename = request.data.decode('utf-8')
+    file_path = os.path.join(Config.UPLOAD_PATH, secure_filename(pdf_filename))
+   
+    if pdf_filename.endswith('.pdf'):
+        # Convert PDF to images
+        images = convert_from_path(file_path)
+        
+        # Extract text from images using OCR
+        extracted_text = '\n'.join([pytesseract.image_to_string(img) for img in images])
+        
+        # Question to ask the LayoutLM model
+        questions = {
+        "Exporter/Exportateur": "Who is the exporter?",
+        "Exporter EORI No.": "What is the EORI No.?",
+        "Exporter Address": "What is the address?",
+        "Exporter City": "What is the city?",
+        "Exporter Zip Code": "What is the zip code?",
+        "Exporter Country": "What is the country?",
+        "Importer/Importateur": "Who is the importer?",
+        "Importer Consignee": "Who is the consignee?",
+        "Importer VAT No.": "What is the VAT No.?",
+        "Document ID": "What is the document ID?",
+        "Document Date": "What is the date of the document?",
+        "Country Dispatch": "What is the country of dispatch?",
+        "Incoterms": "What are the Incoterms used in the document?",
+        "City of Delivery":" What is the city of delivery?",
+        # "Commodity code": "What is the commodity code in the document?",
+        "Final Destination": "What is the final destination mentioned?",
+        "Total Gross Weight": "What is the total gross weight?"
+    }
+        field_values = {}
+        # Use the LayoutLM pipeline to answer the question
+        for field, question in questions.items():
+            result = pipe(question=question, context=extracted_text,image=images[0])
+            if result[0]['score']>0.01:
+                field_values[field] = result[0]["answer"]
+                answer = result[0]["answer"]
+            else:
+                field_values[field] = " "
+                answer = " "
+        
+        return jsonify({"answer": field_values})
+    
+    return jsonify({"error": "Invalid or unsupported file format"})

@@ -10,6 +10,12 @@ a:hover{
   text-decoration: none;
 }
 
+.fileinput-cancel{
+    visibility: hidden;
+}
+.file-no-browse{
+    visibility: hidden;
+}
 body{
   font-family: 'Nunito', sans-serif;
 }
@@ -205,10 +211,4 @@ body{
 .rounded {
     border-radius: 1.25rem!important;
 }
-
-.fileinput-cancel{
-    visibility: hidden;
-}
-.file-no-browse{
-    visibility: hidden;
-}
+ 

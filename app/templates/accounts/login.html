@@ -1,0 +1,90 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Login {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{{ config.ASSETS_ROOT }}/css/login.css" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="content">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card" id="card">
+                        <div class="card-header">
+                            <h2 class="card-title mt-2">Login</h2>
+                            <h4>
+                                {% if msg %}
+                                <span style="color: red;">{{ msg | safe }}</span>
+                                {% else %}
+                                    Add your credentials
+                                {% endif %}
+                            </h4>
+                        </div>
+                        <div class="card-body">
+
+                            <form role="form" method="post" action="" id="form_card">
+
+                                {{ form.hidden_tag() }}
+
+                                <div class="row">
+
+                                    <div class="col-md-1 px-1">
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 px-5">
+                                        <div class="form-group">
+                                            {{ form.username(placeholder="Username", class="form-control") }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-1 pl-1">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 px-5">
+                                        <div class="form-group">
+                                            {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-1 pl-1"></div>
+
+                                    <div class="col-md-12 px-5">
+                                        <button name="login" type="submit" class="btn btn-fill mb-2" id="login-btn">Login</button>
+
+                                        <div class="clearfix"></div>                                        
+                                        &nbsp; &nbsp; Don't have an account? <a href="{{ url_for('authentication_blueprint.register') }}" >Register</a>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

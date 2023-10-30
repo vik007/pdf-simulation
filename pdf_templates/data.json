@@ -250,5 +250,115 @@
             "text": "Python, Fast API, pandas, selenium, requests, MS SQL",
             "page_no": 2
         }
+    ],
+    "hosting": [
+        {
+            "coordinate": {
+                "h": 293.3333333333333,
+                "w": 124.66666666666667,
+                "x": 57.333333333333336,
+                "y": 288.6666666666667
+            },
+            "label": "invoice",
+            "text": "Rechnung",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 314.6666666666667,
+                "w": 190.66666666666666,
+                "x": 148,
+                "y": 305.3333333333333
+            },
+            "label": "omgh",
+            "text": "30064443",
+            "page_no": 1
+        }
+    ],
+    "null": [],
+    "dIVYA": [
+        {
+            "coordinate": {
+                "h": 147.33333333333334,
+                "w": 412,
+                "x": 344,
+                "y": 132
+            },
+            "label": "asdsd",
+            "text": "Project Name",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 176,
+                "w": 442.6666666666667,
+                "x": 330,
+                "y": 162.66666666666666
+            },
+            "label": "saSA",
+            "text": "Project Start Date",
+            "page_no": 1
+        }
+    ],
+    "Invoice": [
+        {
+            "coordinate": {
+                "h": 264.6666666666667,
+                "w": 466,
+                "x": 341.3333333333333,
+                "y": 232
+            },
+            "label": "Exporter",
+            "text": "Created By Varun Kothari Xyz Ccc",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 160.66666666666666,
+                "w": 298,
+                "x": 191.33333333333334,
+                "y": 144.66666666666666
+            },
+            "label": "Invoice",
+            "text": "12OCT2023134010",
+            "page_no": 1
+        }
+    ],
+    "data": [
+        {
+            "coordinate": {
+                "h": 201.33333333333334,
+                "w": 311.3333333333333,
+                "x": 183.33333333333334,
+                "y": 169.33333333333334
+            },
+            "label": "Exporter",
+            "text": "Invoice Date 12 Oct 2023 Due Date",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 404,
+                "w": 381.3333333333333,
+                "x": 274,
+                "y": 393.3333333333333
+            },
+            "label": "dffd",
+            "text": "Advance Amount",
+            "page_no": 1
+        }
+    ],
+    "sedsr": [
+        {
+            "coordinate": {
+                "h": 160,
+                "w": 413.3333333333333,
+                "x": 340,
+                "y": 150
+            },
+            "label": "Exporerf",
+            "text": "test project",
+            "page_no": 1
+        }
     ]
 }

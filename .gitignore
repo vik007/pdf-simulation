@@ -1,5 +1,6 @@
 # Ignore Python virtual environment
-pdf_env/
+my_pdf/
+
 
 
 # Ignore VSCode settings
@@ -13,5 +14,6 @@ __pycache__/
 .env/
 *.env
 
-
+# unnecessary docs
+app/static/uploads
   

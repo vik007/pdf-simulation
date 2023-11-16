@@ -359,3 +359,56 @@ function automateData(pdf_name) {
         }
     }
 }
+
+
+function processImagesAndPDFs(formData) {
+    const csrfToken = $('#csrf_token').val();
+
+    // Send a POST request to process images and PDFs
+    fetch('/extract-table', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+        },
+        body: file.name,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error('Error:', data.error);
+            // Handle the error, display a message, or take appropriate action
+        } else {
+            // Process the answer received from the server for the second API
+            let count =1;
+            const para = document.createElement("h5");
+            para.innerText="Line Items"
+            form_id.appendChild(para);
+            for (var i=0;i<data.message.page1.table_data.length;i++){
+                const newRow = document.createElement("div");
+                newRow.classList.add("row", "mb-2", "form-row");
+
+                const inputColumn = document.createElement("div");
+                inputColumn.classList.add("col-md-12");
+                const newInput = document.createElement("input");
+                newInput.type = "text";
+                newInput.placeholder = "Extracted text";
+                newInput.classList.add("form-control", "dynamic-input");
+                newInput.setAttribute("aria-describedby", "passwordHelpInline");
+                newInput.value = count+" - "+data.message.page1.table_data[i];
+                inputColumn.appendChild(newInput);
+                newRow.appendChild(inputColumn);
+                // newRow.appendChild(textColumn);
+                count++;
+                
+                form_id.appendChild(newRow);
+
+                // console.log(data.message);
+            }
+
+            // Do something with the result if needed
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}

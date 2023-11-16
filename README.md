@@ -47,40 +47,52 @@ pip install -r requirements.txt
 python3 main.py
 ```
 
+ 
 
 ## PROJECT FOLDER STRUCTURE 
    ```
    |-- app/
-   |    |
-   |    |-- __init__.py                           
-   |    |-- model.py                 
-   |    |-- routes.py                       
-   |    |                  
-   |-- static/
-   |    |-- assets<css, js, img>          
-   |    |-- uploads
-   |    |
-   |-- pdf_templates/
-   |    |-- data.json
-   |    |
-   |-- templates/                      
-   |    |-- includes/                  
-   |    |    |-- navigation.html       
-   |    |    |-- sidebar.html          
-   |    |    |-- footer.html           
-   |    |    |-- scripts.html          
-   |    |
-   |    |-- layouts/                   
-   |    |    |-- base.html              
-   |    |        
-   |    |-- home/                      
-   |    |         |-- annoted.html            
-   |    |         |-- automate.html         
-   |    |                 
-   |    |    
-   |-- config.py                             
+   |    --authentication/
+   |        |--__init__.py 
+   |        |-- model.py 
+   |        |-- routes.py 
+   |        |-- forms.py 
+   |        |
+   |    --home/
+   |        |-- __init__.py                           
+   |        |-- model.py                 
+   |        |-- routes.py                       
+   |        |                  
+   |    -- static/
+   |        |-- assets<css, js, img>          
+   |        |-- uploads
+   |        |
+   |    -- templates/                      
+   |        |-- includes/                  
+   |        |    |-- navigation.html       
+   |        |    |-- sidebar.html          
+   |        |    |-- footer.html           
+   |        |    |-- scripts.html          
+   |        |
+   |        |-- layouts/                   
+   |        |    |-- base.html              
+   |        |        
+   |        |-- home/                      
+   |        |    |-- annoted.html            
+   |        |    |-- automate.html         
+   |        |    |-- page-403.html
+   |        |    |-- pdf_template.html
+   |        |
+   |        |--accounts/
+   |        |    |-- login.html
+   |        |    |-- register.html
+   |        |
+   |        |    
+   |    -- config.py
+   |    --__init__.py                          
    |-- .gitignore                     
-   |
+   |--pdf_templates/
+   |        |--data.json
    |-- requirements.txt                     
    |-- run.sh
    |-- README.md

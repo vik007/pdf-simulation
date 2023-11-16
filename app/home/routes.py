@@ -12,6 +12,8 @@ from pdf2image import convert_from_path
 import pytesseract, tempfile
 from app.home import blueprint 
 from flask_login import login_required
+from PIL import Image
+from ultralytics import YOLO
 
 selected_data = []
 data_dict = dict()
@@ -334,59 +336,89 @@ def process_pdf():
         return jsonify({"answer": field_values})
     
     return jsonify({"error": "Invalid or unsupported file format"})
-    # try:
-    #     # Retrieve filename from request data
-    #     pdf_filename = request.data.decode('utf-8')
-    #     # file_path = os.path.join(Config.UPLOAD_PATH, secure_filename(pdf_filename))
-    
-    #     # Validate file format 
-    #     if not pdf_filename.endswith('.pdf'):
-    #         raise Exception(f"Unsupported file format: {pdf_filename}")
+
+@blueprint.route('/extract-table', methods=['POST'])
+def extract_table():
+   
+    load_model = YOLO('keremberke/yolov8m-table-extraction')
+
+    # Set YOLO model parameters
+    load_model.conf = 0.25
+    load_model.iou = 0.45
+    load_model.agnostic_nms = False
+    load_model.max_det = 1000
+    data_list = {}
+    pdf_filename = request.data.decode('utf-8')
+    file_path = os.path.join(Config.UPLOAD_PATH, secure_filename(pdf_filename))
+    try:
+        # Check if a file is sent in the request
+        if not pdf_filename: 
+            return jsonify({"error": "No file provided"})
+
+        if pdf_filename.endswith(('.jpeg','.png','.jpg')):
+            print("image recived...")
+            image= Image.open(file_path)
+            data = image_data(image)
+
+            return jsonify({"message": data})
+
+        # uploaded_file is PDF :
+        elif pdf_filename.endswith('.pdf'):
+            # Initialize PyMuPDF to extract images from the PDF
+            doc = fitz.open(file_path, filetype="pdf")
+
+            dpi = 300
+            zoom = dpi/72
+            magnify = fitz.Matrix(zoom, zoom)
+
+            count = 0
+            data_list = {}
+            for page in doc:
+                count += 1
+                pix = page.get_pixmap(matrix=magnify)
+                pix_img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                
+                data = image_data(pix_img,load_model)
+                data_list[f'page{count}'] = data
+
+            return jsonify({"message": data_list})
         
-    #     # Generate secure filename and file path
-    #     secure_filename = secure_filename(pdf_filename)
-    #     file_path = os.path.join(Config.UPLOAD_PATH, secure_filename)
+        else:
+            return jsonify({"error": "Invalid content type"})
+
+    except Exception as e:
+        return jsonify({"message": data_list,"warning": "Unable to detect line items from another page"})
+
+
+def image_data(image,load_model):
+    results = load_model.predict(image)
+    # Check if tables are detected
+    if results:
+        # Get the first detected table
+        table_result = results[0].boxes
         
-    #     # Convert PDF to images
-    #     images = convert_from_path(file_path)
+        # Extract the coordinates of the detected table
+        table_box = table_result[0].cpu().numpy()
+        xmin=table_box.boxes[0][0].item()
+        ymin=table_box.boxes[0][1].item()
+        xmax=table_box.boxes[0][2].item()
+        ymax=table_box.boxes[0][3].item()
+        conf=table_box.boxes[0][4].item()
+        cls=table_box.boxes[0][5].item()
+
+        # Crop the image to the table region
+        table_image = image.crop((int(xmin), int(ymin), int(xmax), int(ymax)))
         
-    #     # Extract text from images using OCR
-    #     extracted_text = '\n'.join([pytesseract.image_to_string(img) for img in images])
-        
-    #     # Question to ask the LayoutLM model
-    #     questions = {
-    #     "Exporter/Exportateur": "Who is the exporter?",
-    #     "Exporter EORI No.":  "What is the exporter's address?",
-    #     "Exporter Address":  "What is the exporter's address?",
-    #     "Exporter City": "What is the exporter's city?",
-    #     "Exporter Zip Code": "What is the exporter's zip code 5 digit code?",
-    #     "Exporter Country": "What is the exporter's country?",
-    #     "Importer/Importateur": "Who is the importer?",
-    #     "Importer Consignee": "Who is the consignee?",
-    #     "Importer VAT No.":  "What is the importer's VAT number?",
-    #     "Document ID": "What is the invoice number or document number?",
-    #     "Document Date": "What is the document date?",
-    #     "Country Dispatch": "What is the country of dispatch?",
-    #     "Incoterms": "What Incoterms are used in the document?",
-    #     "City of Delivery":" What is the city of delivery?",
-    #     # "Commodity code": "What is the commodity code in the document?",
-    #     "Final Destination": "What is the final destination mentioned in the document?",
-    #     "Total Gross Weight": "What is the gross weight?",
-    #     "Total Amount": "what is the total amount ?" }
-        
-    #     field_values = {}
-    #     # Use the LayoutLM pipeline to answer the question
-    #     for field, question in questions.items():
-            
-    #         result = pipe(question=question, context=extracted_text, image=images[0])
-    #         if result[0]['score']>0.01:
-    #             field_values[field] = result[0]["answer"]
-    #             answer = result[0]["answer"]
-    #         else:
-    #             field_values[field] = " "
-    #             answer = " "
-        
-    #     return jsonify({"answer": field_values})
-    
-    # except Exception as e:
-    #     return jsonify({"error": "An unexpected error occurred."}) 
+        # Perform OCR on the table region using pytesseract
+       
+        table_text = pytesseract.image_to_string(table_image, lang='eng', config='--psm 6 --oem 3')    
+        table_rows = [row.strip() for row in table_text.split('\n')]
+
+        table_data = [row for row in table_rows if row]
+
+        # Prepare the JSON response
+        response_data = {
+            "table_data": table_data
+        }
+        # render = render_result(model=load_model, image=table_image, result=results[0])
+        return response_data

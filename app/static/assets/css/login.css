@@ -1,0 +1,38 @@
+#card{
+    width: 40vw;
+    text-align: center;
+    margin-left:40% ;
+    box-shadow: 0 2px 6px 0 rgba(67,89,113,0.12);
+    background-clip: border-box;
+    border: 0 solid #d9dee3;
+    border-radius: 0.5rem;
+   
+}
+
+/* Media Query for Responsive Styling */
+@media (max-width: 900px) {
+    #card {
+        width: 80vw; /* Adjust the width as needed for smaller screens */
+        margin-left: 5%; /* Adjust the margin as needed for centering on smaller screens */
+    }
+    #form_card{
+        margin-right: 10%;
+        float:left; 
+    }
+}
+
+
+.form-group {
+    margin-bottom: 1rem;
+    margin-left: 12vw;
+}
+#login-btn{
+    background-color: #976FDA;
+
+}
+a{
+    color: #976FDA;
+}
+a ::after:hover{
+    color: #976FDA;
+}

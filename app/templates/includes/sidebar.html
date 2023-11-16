@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="sidebar" data-image="{{ config.ASSETS_ROOT }}/img/sidebar-5.jpg">
+    <!--
+Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+Tip 2: you can also add an image using data-image tag
+-->
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="/" class="simple-text">
+                PDF Simulation
+            </a>
+        </div>
+        <ul class="nav">
+            {% if current_user.is_authenticated %}
+            <li class="nav-item nav-item {% if 'annoted' in segment %} active {% endif %}">
+                <a class="nav-link" href="/annoted">
+                    <i class="fa-solid fa-file-pen"></i>
+                    <p>PDF Annoted</p>
+                </a>
+            </li>
+
+            <li class="nav-item nav-item {% if 'automate' in segment %} active {% endif %}">
+                <a class="nav-link" href="/automate">
+                    <i class="fa-solid fa-wand-sparkles"></i>
+                    <p>PDF Automate</p>
+                </a>
+            </li>
+
+            <li class="nav-item nav-item {% if 'template' in segment %} active {% endif %}">
+                <a class="nav-link" href="/apply-template">
+                    <i class="nc-icon nc-paper-2"></i>
+                    <p>Apply template</p>
+                </a>
+            </li>
+             
+            <li>
+                <a class="nav-link" href="{{ url_for('authentication_blueprint.logout') }}">
+                    <i class="nc-icon nc-button-power"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link " target="_blank" 
+                   href="https://appseed.us/support/">
+                    <i class="nc-icon nc-spaceship"></i>
+                    <p>Support</p>
+                </a>
+            </li>
+            
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link active" target="_blank" 
+                   href="https://appseed.us/support/">
+                    <i class="nc-icon nc-spaceship"></i>
+                    <p>Support</p>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

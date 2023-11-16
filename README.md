@@ -31,7 +31,6 @@ Activate the environment for setup project :
 ```
 source pdf_env/bin/activate
 ```
-check virtual environment name folder created or not in current directory
 
 If you want to out from environment :
 ```
@@ -44,26 +43,10 @@ pip install -r requirements.txt
 ```
 
 #### Run the Project 
-Create .env file in root directory and add :
-```
-DB_USERNAME = 'xyz'
-DB_PASSWORD = 'your DB password'
-DB_DATABASE_NAME = 'DB name'
-DB_HOST = 'ip host'
-SQLALCHEMY_TRACK_MODIFICATIONS = True 
-SECRET_KEY = 'ABC'
-SQLALCHEMY_DATABASE_URI = "mysql+pymysql://%s:%s@%s/%s" % ( DB_USERNAME, DB_PASSWORD, DB_HOST,DB_DATABASE_NAME)
-STATIC_DIR = "/static"
-SERVER_NAME = 'localhost:0000' 
-ASSETS_ROOT="/static/assets"
-UPLOAD_FOLDER="static/uploads"
-```
-
 ```
 python3 main.py
 ```
 
- 
 
 ## PROJECT FOLDER STRUCTURE 
    ```

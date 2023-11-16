@@ -1,0 +1,434 @@
+{
+    "aman": [
+        {
+            "coordinate": {
+                "h": 103.33333333333333,
+                "w": 149.33333333333334,
+                "x": 90,
+                "y": 96
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 139.33333333333334,
+                "w": 194.66666666666666,
+                "x": 93.33333333333333,
+                "y": 123.33333333333333
+            },
+            "label": "desg",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 210,
+                "w": 249.33333333333334,
+                "x": 221.33333333333334,
+                "y": 204.66666666666666
+            },
+            "label": "experience",
+            "text": "2.2 years",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 478,
+                "w": 208,
+                "x": 122,
+                "y": 466
+            },
+            "label": "project 1",
+            "text": "Chatbot Module",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 277.3333333333333,
+                "w": 170,
+                "x": 123.33333333333333,
+                "y": 270.6666666666667
+            },
+            "label": "project 2",
+            "text": "Happier",
+            "page_no": 2
+        },
+        {
+            "coordinate": {
+                "h": 712,
+                "w": 233.33333333333334,
+                "x": 125.33333333333333,
+                "y": 702
+            },
+            "label": "project 3",
+            "text": "Eye Detection Module",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 252.66666666666666,
+                "w": 545.3333333333334,
+                "x": 70.66666666666667,
+                "y": 201.33333333333334
+            },
+            "label": "description",
+            "text": "Passionate and motivated with 2.2 years ",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 106,
+                "w": 133.33333333333334,
+                "x": 78,
+                "y": 90.66666666666667
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 212,
+                "w": 259.3333333333333,
+                "x": 226,
+                "y": 208
+            },
+            "label": "exp",
+            "text": "2.2 years",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 280,
+                "w": 154.66666666666666,
+                "x": 122.66666666666667,
+                "y": 268
+            },
+            "label": "project",
+            "text": "Happier",
+            "page_no": 2
+        }
+    ],
+    "nitesh": [
+        {
+            "coordinate": {
+                "h": 101.33333333333333,
+                "w": 146,
+                "x": 82.66666666666667,
+                "y": 95.33333333333333
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 213.33333333333334,
+                "w": 184,
+                "x": 82.66666666666667,
+                "y": 204.66666666666666
+            },
+            "label": "hobby",
+            "text": "Passionate and motivated",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 543.3333333333334,
+                "w": 276.6666666666667,
+                "x": 116.66666666666667,
+                "y": 540.6666666666666
+            },
+            "label": "skills",
+            "text": "(LLMs) like GPT-4 with external data.",
+            "page_no": 1
+        }
+    ],
+    "abc": [
+        {
+            "coordinate": {
+                "h": 102.66666666666667,
+                "w": 138,
+                "x": 76.66666666666667,
+                "y": 92
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 138,
+                "w": 212,
+                "x": 93.33333333333333,
+                "y": 126
+            },
+            "label": "exp",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 212,
+                "w": 259.3333333333333,
+                "x": 223.33333333333334,
+                "y": 204.66666666666666
+            },
+            "label": "exp",
+            "text": "2.2 years",
+            "page_no": 1
+        }
+    ],
+    "a": [
+        {
+            "coordinate": {
+                "h": 108.66666666666667,
+                "w": 143.33333333333334,
+                "x": 73.33333333333333,
+                "y": 86
+            },
+            "label": "a",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 160,
+                "w": 123.33333333333333,
+                "x": 44,
+                "y": 154
+            },
+            "label": "a",
+            "text": "Tax ID: xx-xxxxxx",
+            "page_no": 1
+        }
+    ],
+    "resume": [
+        {
+            "coordinate": {
+                "h": 103.33333333333333,
+                "w": 143.33333333333334,
+                "x": 86.66666666666667,
+                "y": 94.66666666666667
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 128,
+                "w": 175.33333333333334,
+                "x": 108,
+                "y": 124.66666666666667
+            },
+            "label": "desg",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 476,
+                "w": 223.33333333333334,
+                "x": 121.33333333333333,
+                "y": 468.6666666666667
+            },
+            "label": "project 1",
+            "text": "Chatbot Module",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 276.6666666666667,
+                "w": 164,
+                "x": 124,
+                "y": 270.6666666666667
+            },
+            "label": "project 2",
+            "text": "Happier",
+            "page_no": 2
+        },
+        {
+            "coordinate": {
+                "h": 302,
+                "w": 424.6666666666667,
+                "x": 159.33333333333334,
+                "y": 300
+            },
+            "label": "desc",
+            "text": "Python, Fast API, pandas, selenium, requests, MS SQL",
+            "page_no": 2
+        }
+    ],
+    "hosting": [
+        {
+            "coordinate": {
+                "h": 293.3333333333333,
+                "w": 124.66666666666667,
+                "x": 57.333333333333336,
+                "y": 288.6666666666667
+            },
+            "label": "invoice",
+            "text": "Rechnung",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 314.6666666666667,
+                "w": 190.66666666666666,
+                "x": 148,
+                "y": 305.3333333333333
+            },
+            "label": "omgh",
+            "text": "30064443",
+            "page_no": 1
+        }
+    ],
+    "null": [],
+    "dIVYA": [
+        {
+            "coordinate": {
+                "h": 147.33333333333334,
+                "w": 412,
+                "x": 344,
+                "y": 132
+            },
+            "label": "asdsd",
+            "text": "Project Name",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 176,
+                "w": 442.6666666666667,
+                "x": 330,
+                "y": 162.66666666666666
+            },
+            "label": "saSA",
+            "text": "Project Start Date",
+            "page_no": 1
+        }
+    ],
+    "Invoice": [
+        {
+            "coordinate": {
+                "h": 264.6666666666667,
+                "w": 466,
+                "x": 341.3333333333333,
+                "y": 232
+            },
+            "label": "Exporter",
+            "text": "Created By Varun Kothari Xyz Ccc",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 160.66666666666666,
+                "w": 298,
+                "x": 191.33333333333334,
+                "y": 144.66666666666666
+            },
+            "label": "Invoice",
+            "text": "12OCT2023134010",
+            "page_no": 1
+        }
+    ],
+    "data": [
+        {
+            "coordinate": {
+                "h": 201.33333333333334,
+                "w": 311.3333333333333,
+                "x": 183.33333333333334,
+                "y": 169.33333333333334
+            },
+            "label": "Exporter",
+            "text": "Invoice Date 12 Oct 2023 Due Date",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 404,
+                "w": 381.3333333333333,
+                "x": 274,
+                "y": 393.3333333333333
+            },
+            "label": "dffd",
+            "text": "Advance Amount",
+            "page_no": 1
+        }
+    ],
+    "sedsr": [
+        {
+            "coordinate": {
+                "h": 160,
+                "w": 413.3333333333333,
+                "x": 340,
+                "y": 150
+            },
+            "label": "Exporerf",
+            "text": "test project",
+            "page_no": 1
+        }
+    ],
+    "aman_detail": [
+        {
+            "coordinate": {
+                "h": 102,
+                "w": 154.66666666666666,
+                "x": 84.66666666666667,
+                "y": 92
+            },
+            "label": "name",
+            "text": "Aman",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 132.66666666666666,
+                "w": 180,
+                "x": 100.66666666666667,
+                "y": 128
+            },
+            "label": "desg",
+            "text": "Python Developer",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 210.66666666666666,
+                "w": 247.33333333333334,
+                "x": 220,
+                "y": 209.33333333333334
+            },
+            "label": "exp",
+            "text": "2.2 years",
+            "page_no": 1
+        }
+    ],
+    "vender": [
+        {
+            "coordinate": {
+                "h": 106.66666666666667,
+                "w": 566.6666666666666,
+                "x": 514.6666666666666,
+                "y": 98
+            },
+            "label": "date",
+            "text": "July 8, 2011",
+            "page_no": 1
+        },
+        {
+            "coordinate": {
+                "h": 122,
+                "w": 571.3333333333334,
+                "x": 554.6666666666666,
+                "y": 116
+            },
+            "label": "inv",
+            "text": "4",
+            "page_no": 1
+        }
+    ]
+}
